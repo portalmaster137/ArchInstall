@@ -66,9 +66,12 @@ fi
 echo '[+] Partitioning the disk...'
 echo "label: gpt" | sfdisk "$INSTALL_DISK"
 # Make a 1GB EFI partition, 4GB swap partition, and the rest as root partition
-echo "1G,ef00,*" | sfdisk "$INSTALL_DISK"
-echo "4G,8200" | sfdisk "$INSTALL_DISK"
-echo ",8300" | sfdisk "$INSTALL_DISK"
+sfdisk "$INSTALL_DISK" << EOF
+size=1GiB, type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B
+size=4GiB, type=0657FD6D-A4AB-43C4-84E5-0933C84B4F4F
+type=0FC63DAF-8483-4772-8E79-3D69D8477DE4
+EOF
+
 echo '[+] Formatting the partitions...'
 mkfs.fat -F32 "$INSTALL_DISK"1
 mkswap "$INSTALL_DISK"2
