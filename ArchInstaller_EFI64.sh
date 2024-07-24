@@ -1,5 +1,9 @@
 INSTALL_VERSION="1.0.0"
 
+# use set fail on error
+set -e
+set -o pipefail
+
 clear
 echo 'ArchInstaller v'$INSTALL_VERSION
 echo '----------------------'
