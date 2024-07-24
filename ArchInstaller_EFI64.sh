@@ -53,9 +53,9 @@ if [ ! -b "$INSTALL_DISK" ]; then
     exit 1
 fi
 
-#Check for 16 GB of free space
-if [ "$(df -g --output=avail "$INSTALL_DISK" | tail -n 1)" -lt 16 ]; then
-    echo '[-] '$INSTALL_DISK' does not have enough free space.'
+# Check for 16GB of space on the disk
+if [ "$(blockdev --getsize64 "$INSTALL_DISK")" -lt 17179869184 ]; then
+    echo '[-] '$INSTALL_DISK' does not have at least 16GB of space.'
     exit 1
 fi
 
