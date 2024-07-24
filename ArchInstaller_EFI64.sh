@@ -54,7 +54,7 @@ if [ ! -b "$INSTALL_DISK" ]; then
 fi
 
 #Check for 16 GB of free space
-if [ "$(df -k --output=avail "$INSTALL_DISK" | tail -n 1)" -lt 16777216 ]; then
+if [ "$(df -g --output=avail "$INSTALL_DISK" | tail -n 1)" -lt 16 ]; then
     echo '[-] '$INSTALL_DISK' does not have enough free space.'
     exit 1
 fi
